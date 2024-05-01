@@ -1,4 +1,4 @@
-package br.com.tiagoprudente.literalura.service.api;
+package br.com.tiagoprudente.literalura.service.api.dto;
 
 import java.util.ArrayList;
 
