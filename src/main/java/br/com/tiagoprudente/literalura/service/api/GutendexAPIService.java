@@ -33,4 +33,25 @@ public class GutendexAPIService implements IBookAPI {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public BookData findSingleBook(HashMap<String, String> params) {
+        ObjectMapper objectMapper = new ObjectMapper();
+
+        String searchParam = "?search=" + params.get("bookName").replaceAll(" ", "%20");
+
+        URI uri = URI.create(BASE_URL + searchParam);
+
+        HttpClient client = HttpClient.newHttpClient();
+        HttpRequest request = HttpRequest.newBuilder().uri(uri).build();
+
+        try {
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            return objectMapper.readValue(response.body(), BookData.class);
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

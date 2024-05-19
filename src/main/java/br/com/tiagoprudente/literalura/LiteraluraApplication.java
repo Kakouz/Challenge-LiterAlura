@@ -8,14 +8,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class LiteraluraApplication implements CommandLineRunner {
-	private final Menu app = new Menu();
+    @Autowired
+    private Menu app;
 
-	public static void main(String[] args) {
-		SpringApplication.run(LiteraluraApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(LiteraluraApplication.class, args);
+    }
 
-	@Override
-	public void run(String... args) throws Exception {
-		app.run();
-	}
+    @Override
+    public void run(String... args) throws Exception {
+        app.run();
+    }
 }

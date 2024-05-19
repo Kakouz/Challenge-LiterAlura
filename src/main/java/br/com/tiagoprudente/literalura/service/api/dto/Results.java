@@ -1,6 +1,7 @@
 package br.com.tiagoprudente.literalura.service.api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -8,5 +9,7 @@ import java.util.List;
 public record Results(Long id,
                       String title,
                       List<AuthorsData> authors,
-                      List<String> languages) {
+                      List<String> languages,
+                      @JsonProperty("download_count")
+                      Long downloadCount) {
 }

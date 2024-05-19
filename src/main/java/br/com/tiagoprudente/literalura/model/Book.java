@@ -23,14 +23,17 @@ public class Book implements Serializable {
 
     private ArrayList<String> languages;
 
+    private Long downloadCount;
+
     public Book() {
     }
 
-    public Book(UUID id, List<Author> author, String bookTitle, ArrayList<String> languages) {
+    public Book(UUID id, List<Author> author, String bookTitle, ArrayList<String> languages, Long downloadCount) {
         this.id = id;
         this.author = author;
         this.bookTitle = bookTitle;
         this.languages = languages;
+        this.downloadCount = downloadCount;
     }
 
     public UUID getId() {
@@ -65,7 +68,18 @@ public class Book implements Serializable {
         this.languages = languages;
     }
 
+    public Long getDownloadCount() {
+        return downloadCount;
+    }
+
+    public void setDownloadCount(Long downloadCount) {
+        this.downloadCount = downloadCount;
+    }
+
     public Book fromBookData(List<Results> data) {
-        return new Book(UUID.randomUUID(), Author.fromAuthorData(data.get(0).authors()), data.get(0).title(), (ArrayList<String>) data.get(0).languages());
+        if (data.isEmpty()) {
+            return null;
+        }
+        return new Book(UUID.randomUUID(), Author.fromAuthorData(data.get(0).authors()), data.get(0).title(), (ArrayList<String>) data.get(0).languages(), data.get(0).downloadCount());
     }
 }
